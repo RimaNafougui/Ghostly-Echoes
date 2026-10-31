@@ -137,21 +137,21 @@ The build order follows the design's module order: constants → rng → test ha
 - [x] 5. Checkpoint - Core simulation complete
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 6. Implement the Stage_Generator
-  - [~] 6.1 Create `src/stageGenerator.js` with difficulty, seeds and error type
+- [x] 6. Implement the Stage_Generator
+  - [x] 6.1 Create `src/stageGenerator.js` with difficulty, seeds and error type
     - `difficulty(stage)` with `k = min(stage − 1, 19)` and integer `lerp`: `gapPx` 200 → 120, `spacingPx` 520 → 380, `hazardPerMille` 0 → 600, `gateCount = min(3, 1 + trunc(2k / 13))`
     - `GeneratorError extends Error` with `stage`, `seed` and `reason`
     - `generateStage(stage, opts)` entry point that computes `seed = stageSeed(BASE_SEED, stage, seedSalt)`, creates the RNG and resolves `params = paramsOverride ?? difficulty(stage)` with `gateCount` always from `difficulty(stage)`
     - _Requirements: 9.5, 9.7, 9.11, A7_
 
-  - [~] 6.2 Implement the x skeleton, steering controller and Player witness
+  - [x] 6.2 Implement the x skeleton, steering controller and Player witness
     - Build the x-only skeleton: runway, per gate 2 regular columns at `spacingPx`, an `APPROACH_PX` approach zone and a `GATE_W` gate column, then 2 trailing columns and `finishX = lastColumnRight + FINISH_MARGIN_PX`
     - Pick passage targets with the RNG: gate half chosen per gate, gate `cy` ≥ `MIDLINE_CLEARANCE_PX` (100 px) from the midline, Rune target `ry_k` in the opposite half (`[80, 140]` or `[340, 400]`)
     - `steer(g, targetY)`: flap iff `g.y + 16·FP + 8·g.vy > (targetY + STEER_BIAS)·FP`, switching to the next column's target once the hitbox left edge passes the previous column's right edge
     - Generate the Player witness log by running `steer` + `stepGhost` from Tick 0 until `x ≥ finishX`, before any wall or Hazard exists
     - _Requirements: 9.8, 9.9_
 
-  - [~] 6.3 Implement Echo witnesses
+  - [x] 6.3 Implement Echo witnesses
     - Divergence Tick `D_k`: first Tick the witness hitbox left edge passes the last regular column before gate `k`'s approach zone; Echo `k` shares the Player log on `[0, D_k)` and then steers to `ry_k`
     - Rune x first: `runeGap = rng.nextInt(RUNE_GAP_MIN, RUNE_GAP_MAX)`, `runeRight = gateLeft − runeGap`, `runeLeft = runeRight − RUNE_W`
     - Simulate the Echo, find the crossing Tick `c_k` (Echo hitbox center x ≥ Rune center x) and center the Rune vertically on the Echo hitbox center at `c_k`
@@ -159,20 +159,20 @@ The build order follows the design's module order: constants → rng → test ha
     - Truncate the Echo log to `L_k + 1` entries, where `L_k` is the last Tick the Echo hitbox intersects the placed Rune
     - _Requirements: 6.1, 9.8, 9.9, A15, A18_
 
-  - [~] 6.4 Implement geometry placement
+  - [x] 6.4 Implement geometry placement
     - For each column, passage = `[minTop − PASSAGE_PAD, maxBottom + PASSAGE_PAD]` over all alive witness hitboxes overlapping the column's x-span (Player and untruncated Echo prefixes), widened symmetrically to ≥ `gapPx`, shifted (not shrunk) into `[0, COURSE_H]`; walls fill above and below
     - Gate rect fills the gate column's passage, with `styleIndex = k` and `runes[k]` linked 1:1
     - Hazards: for each gap between regular columns (not approach zones), `rng.chance(hazardPerMille)` places a 24×24 Hazard at the gap's x-center, y scanned in 4 px steps for maximum clearance from alive witness hitboxes and Course edges, skipped if clearance < 16 px
     - Assemble the `Course` object from the design's data model, including `witness: { player, echoes }`
     - _Requirements: 6.1, 9.9, 9.11_
 
-  - [~] 6.5 Implement `selfCheck` and `checkRunePlacement`
+  - [x] 6.5 Implement `selfCheck` and `checkRunePlacement`
     - `checkRunePlacement(course)`: rune right < gate left; gate right − rune right ≤ 30 × scroll speed; gate left − rune right ≥ `RUNE_GAP_MIN`; Rune center in the opposite vertical half from the passage center; throws `GeneratorError`
     - `selfCheck(course)`: witness replay clears with no death; each Echo `k` played as the Player with Echoes `1..k−1` stays alive through its last Tick; `checkRunePlacement`; `1 ≤ gateCount ≤ 3`; every passage ≥ 2 × `PLAYER_H`
     - Call `selfCheck` at the end of `generateStage`; no candidate retry loop
     - _Requirements: 6.1, 9.9, 9.10, 9.11, 9.12_
 
-  - [~] 6.6 Write unit tests for difficulty and steering in `tests/stageGenerator.test.js`
+  - [x] 6.6 Write unit tests for difficulty and steering in `tests/stageGenerator.test.js`
     - Difficulty table is monotone (gap and spacing non-increasing, Hazard rate and gate count non-decreasing), fixed from Stage 20 on, gap limit ≥ 2 × `PLAYER_H`
     - Stage 1 has exactly 1 gate
     - Steering hover-band check: for flat targets in the clamp range, the steady-state hitbox center stays within −30..+26 px of the target
@@ -184,7 +184,7 @@ The build order follows the design's module order: constants → rng → test ha
     - Compute a canonical fingerprint (hash of the serialized Course for Stages 1–50) and compare it with a checked-in golden value
     - **Validates: Requirements 9.6**
 
-  - [~] 6.8 Write property test for solvability in `tests/stageGenerator.test.js`
+  - [x] 6.8 Write property test for solvability in `tests/stageGenerator.test.js`
     - **Property 7: Solvability**
     - For Stages 1–50, `replayHeadless` with the witness Echo logs as Echoes and the Player log as the Player clears with no death; each Echo witness `k` played as the Player with Echoes `1..k−1` stays alive through its last Tick; 1–3 Echo witness logs, each no longer than the Ticks to the Finish_Line
     - Also check determinism (Property 1) on generated Stages 1–50: two replays of the witness logs on each generated Course are deep-equal at every Tick
@@ -195,7 +195,7 @@ The build order follows the design's module order: constants → rng → test ha
     - For Stages 1–50 and every pair: 1:1 pairing, rune right < gate left, gate right − rune right ≤ 30 × scroll speed, gate left − rune right ≥ `RUNE_GAP_MIN`, opposite vertical halves; `1 ≤ gateCount ≤ 3` (exactly 1 on Stage 1); every passage ≥ 2 × `PLAYER_H`
     - **Validates: Requirements 9.12, 6.1, 9.11**
 
-  - [~] 6.10 Write the generator smoke test in `tests/generatorSmoke.test.js`
+  - [x] 6.10 Write the generator smoke test in `tests/generatorSmoke.test.js`
     - Stages 1–300: `generateStage` + `selfCheck` do not throw, placement invariants hold, gate count is 1–3
     - _Requirements: 9.2, 9.11, 9.12_
 
