@@ -89,8 +89,8 @@ The build order follows the design's module order: constants → rng → test ha
     - `emptyEchoes()` holds 0 entries (new Stage), eviction of the oldest keeps the order of the 2 retained Echoes
     - _Requirements: 5.3, 5.7_
 
-- [ ] 4. Implement the Simulation and frame accumulator
-  - [~] 4.1 Create `src/simulation.js`
+- [x] 4. Implement the Simulation and frame accumulator
+  - [x] 4.1 Create `src/simulation.js`
     - `createRunState(course, echoes)`: Player and every Echo at the Tick-0 start state, gates with `lastEchoOverlapTick = null`, `tick = 0`, `status = 'running'`
     - `stepSimulation(course, state, flap)` in the design's per-Tick order: Player step if alive → each active Echo steps with `log[t]` (missing entries = no flap) → `updateGates` from Echo hitboxes only → Player death checks (walls, Hazards, closed gates, top/bottom edges, inclusive) → finish check only if alive → remove Echoes whose `log.length − 1 === t` → `tick += 1`
     - Return a new state plus `events = { flapped, died, cleared }`, with `died` emitted at most once and the dead Player frozen
@@ -98,13 +98,13 @@ The build order follows the design's module order: constants → rng → test ha
     - Echoes never collide with terrain, gates, edges or other Ghosts
     - _Requirements: 1.1, 1.3, 1.9, 2.3, 2.4, 2.5, 4.1, 4.2, 4.4, 4.5, 4.6, 6.6, 6.7, 6.10, 6.11, 6.13, 7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.7, 7.8, 8.7, 9.1_
 
-  - [~] 4.2 Create `src/main.js` with the pure `advanceAccumulator(accMs, elapsedMs)` helper
+  - [x] 4.2 Create `src/main.js` with the pure `advanceAccumulator(accMs, elapsedMs)` helper
     - `TICK_MS = 1000 / 60`, `EPS = 1e-6`, NaN or negative elapsed treated as 0
     - More than 5 Ticks accumulated → `{ ticks: 5, accMs: 0 }`; otherwise floor the Tick count and carry the remainder
     - Export it through the UMD-style guard; leave the browser bootstrap for task 10.1, guarded so the file loads in Node
     - _Requirements: 1.7, 1.8_
 
-  - [~] 4.3 Write property test for determinism in `tests/simulation.test.js`
+  - [x] 4.3 Write property test for determinism in `tests/simulation.test.js`
     - **Property 1: Determinism**
     - Random seeds, random test Courses from `genCourse`, 0–3 Echo logs and Input_Logs up to 3,600 Ticks; two runs from the same initial state are deep-equal at every Tick and `tick` increases by exactly 1 per step
     - **Validates: Requirements 1.5, 1.1, 1.3, 2.8**
@@ -119,7 +119,7 @@ The build order follows the design's module order: constants → rng → test ha
     - Frame rates 30–240 fps with ±20 % per-frame jitter driven through `advanceAccumulator` (excluding frame gaps over 5 Ticks), compared with direct Tick-by-Tick stepping of the same Input_Log
     - **Validates: Requirements 1.10, 1.7**
 
-  - [~] 4.6 Write property test for the replay round-trip in `tests/replay.test.js`
+  - [x] 4.6 Write property test for the replay round-trip in `tests/replay.test.js`
     - **Property 3: Replay round-trip**
     - Record a random Player Run on a random Course with walls, Hazards and gates from `genCourse`, then replay the finalized log as an Echo alongside up to 2 other random Echoes; assert exact `x`, `y`, `vy` equality at every Tick 0..last and absence of the Echo on later Ticks
     - **Validates: Requirements 4.3, 4.1, 4.2, 4.4, 4.5, 4.6, 6.10, 7.7, 2.5**

@@ -7,6 +7,14 @@
     "2.4 Write property test for crossing coverage in `tests/gates.test.js`": {
       "status": "passed",
       "lastRunTimestamp": 1793488745573
+    },
+    "4.3 Write property test for determinism in `tests/simulation.test.js`": {
+      "status": "passed",
+      "lastRunTimestamp": 1793489190751
+    },
+    "4.6 Write property test for the replay round-trip in `tests/replay.test.js`": {
+      "status": "passed",
+      "lastRunTimestamp": 1793489267510
     }
   },
   "executionHistory": {
@@ -160,6 +168,16 @@
         "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
         "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
         "timestamp": 1793488281064
+      },
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793489019185
+      },
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793489133590
       }
     ],
     "4.2 Create `src/main.js` with the pure `advanceAccumulator(accMs, elapsedMs)` helper": [
@@ -167,6 +185,16 @@
         "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
         "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
         "timestamp": 1793488281091
+      },
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793489142074
+      },
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793489280400
       }
     ],
     "4.3 Write property test for determinism in `tests/simulation.test.js`": [
@@ -174,6 +202,16 @@
         "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
         "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
         "timestamp": 1793488281117
+      },
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793489142097
+      },
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793489281192
       }
     ],
     "4.6 Write property test for the replay round-trip in `tests/replay.test.js`": [
@@ -181,6 +219,16 @@
         "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
         "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
         "timestamp": 1793488281142
+      },
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793489142539
+      },
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793489282051
       }
     ],
     "5. Checkpoint - Core simulation complete": [
@@ -328,6 +376,13 @@
         "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
         "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
         "timestamp": 1793489006862
+      }
+    ],
+    "4. Implement the Simulation and frame accumulator": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793489282091
       }
     ]
   }
