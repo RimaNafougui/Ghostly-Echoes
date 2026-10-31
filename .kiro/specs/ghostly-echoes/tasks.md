@@ -199,7 +199,7 @@ The build order follows the design's module order: constants → rng → test ha
     - Stages 1–300: `generateStage` + `selfCheck` do not throw, placement invariants hold, gate count is 1–3
     - _Requirements: 9.2, 9.11, 9.12_
 
-- [~] 7. Checkpoint - Stage generation complete
+- [x] 7. Checkpoint - Stage generation complete
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 8. Implement the Game state machine and HUD model
