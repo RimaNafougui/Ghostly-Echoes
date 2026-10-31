@@ -2,14 +2,14 @@
 
 ## Overview
 
-The implementation language is vanilla JavaScript (ES2015+, classic scripts), as specified in the design. Each core module in `src/` uses the guarded UMD-style export from the design. It attaches to `globalThis.GhostlyEchoes` in the browser and sets `module.exports` in Node, so the same file loads as a classic `<script>` and through `require` in tests. Tests run with `node --test tests/` using only `node:test` and `node:assert/strict`. There is no `npm install`, no package dependencies and no third-party test or property-testing library.
+The implementation language is vanilla JavaScript (ES2015+, classic scripts), as specified in the design. Each core module in `src/` uses the guarded UMD-style export from the design. It attaches to `globalThis.GhostlyEchoes` in the browser and sets `module.exports` in Node, so the same file loads as a classic `<script>` and through `require` in tests. Tests run with `node --test` using only `node:test` and `node:assert/strict`. There is no `npm install`, no package dependencies and no third-party test or property-testing library.
 
 The build order follows the design's module order: constants → rng → test harness → physics → gates → recorder → echoManager → simulation → stageGenerator → game → hud → input / audio / renderer → main → index.html. Property tests sit directly after the code they verify.
 
 ## Tasks
 
-- [ ] 1. Set up core foundations and test infrastructure
-  - [ ] 1.1 Create `src/constants.js` with all tunables
+- [x] 1. Set up core foundations and test infrastructure
+  - [x] 1.1 Create `src/constants.js` with all tunables
     - Use the UMD-style guarded export (namespace `GhostlyEchoes.constants`, plus `module.exports` in Node)
     - Define `FP = 256`, `COURSE_W/H`, `PLAYER_W/H`, `PLAYER_START_X/Y`, `GRAVITY = 64`, `FLAP_VY = -1280`, `SCROLL_SPEED = 768`, `GATE_HOLD_TICKS = 30`, `MAX_ECHOES = 3`, `COUNTDOWN_STEPS = 60`, `MAX_TICKS_PER_FRAME = 5`, `BASE_SEED = 0x6E05C40D`
     - Define geometry constants `RUNE_W/H`, `GATE_W`, `WALL_W`, `HAZARD_SIZE`, `RUNE_GAP_MIN = PLAYER_W + 4` (36 px), `RUNE_GAP_MAX = 30 × 3 − GATE_W` (66 px), `STEER_BIAS = 57`, `MIDLINE_CLEARANCE_PX = 100`, `PASSAGE_PAD`, `APPROACH_PX`, `RUNWAY_PX`, `FINISH_MARGIN_PX`
@@ -17,13 +17,13 @@ The build order follows the design's module order: constants → rng → test ha
     - Freeze exported objects
     - _Requirements: 1.4, 2.4, 2.5, 4.7, 5.2, 6.1, 6.3, 6.9, 9.5, 9.11, 10.7, 11.8, A16_
 
-  - [ ] 1.2 Create `src/rng.js` with seeded randomness
+  - [x] 1.2 Create `src/rng.js` with seeded randomness
     - Implement `fmix32` (MurmurHash3 finalizer), `deriveSeed(a, b)`, `stageSeed(base, stage, salt = 0)` and `createRng(seed)` (mulberry32 with `nextU32`, inclusive `nextInt(lo, hi)`, `chance(perMille)`)
     - Coerce seeds with `>>> 0` and use only `Math.imul`, `>>> 0` and `| 0` integer arithmetic
     - Use the UMD-style guarded export
     - _Requirements: 1.2, 9.5, 11.8_
 
-  - [ ] 1.3 Create the test harness in `tests/helpers/`
+  - [x] 1.3 Create the test harness in `tests/helpers/`
     - `tests/helpers/load.js`: `require` the core scripts from `src/` and return their APIs in Node without any DOM globals
     - `tests/helpers/property.js`: `forAll(name, { cases = 500, baseSeed }, gen, predicate)` with per-case `caseSeed = deriveSeed(baseSeed, i)` and `rng = createRng(caseSeed)`
     - Support env vars `GE_BASE_SEED` (override base seed), `GE_SEED` (rerun one case by seed) and `GE_CASE` (rerun one case by index), and print the base seed at the start of each property file
@@ -283,7 +283,7 @@ The build order follows the design's module order: constants → rng → test ha
     - _Requirements: 11.2, 11.4, 11.6, 12.1_
 
 - [ ] 11. Final checkpoint - Ensure all tests pass
-  - Ensure all tests pass with `node --test tests/`, ask the user if questions arise.
+  - Ensure all tests pass with `node --test`, ask the user if questions arise.
 
 ## Notes
 

@@ -501,7 +501,7 @@ The recovery path should be unreachable for Stages 1–50, because P7 and P8 cov
 
 ### Runner and Harness
 
-Command: `node --test tests/`. This uses Node's built-in runner, `node:test` and `node:assert/strict`, with no `npm install` and no third-party test or property libraries (12.1). `tests/helpers/load.js` `require`s the core scripts. The UMD guard exposes the same API as in the browser, with no DOM (12.2).
+Command: `node --test`. This uses Node's built-in runner, `node:test` and `node:assert/strict`, with no `npm install` and no third-party test or property libraries (12.1). `tests/helpers/load.js` `require`s the core scripts. The UMD guard exposes the same API as in the browser, with no DOM (12.2).
 
 `tests/helpers/property.js`:
 
