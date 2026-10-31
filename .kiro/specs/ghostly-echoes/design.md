@@ -194,7 +194,7 @@ Units: `FP = 256`, so 1 px = 256 units. Positions and velocities are integer FP 
 | `GATE_W` | 24 px | |
 | `WALL_W` | 48 px | regular column width |
 | `HAZARD_SIZE` | 24 px | |
-| `RUNE_GAP_MIN` | `PLAYER_W + 4` = 36 px | gate left − rune right, design-level (see note) |
+| `RUNE_GAP_MIN` | `PLAYER_W + 4` = 36 px | gate left − rune right, Requirement 6.1 |
 | `RUNE_GAP_MAX` | `30 × 3 − GATE_W` = 66 px | so gate right − rune right ≤ 30 × scroll speed (6.1) |
 | `STEER_BIAS` | 57 px | steering offset |
 | `MIDLINE_CLEARANCE_PX` | 100 px | gate/Rune targets vs midline 240 px |
@@ -205,8 +205,6 @@ Units: `FP = 256`, so 1 px = 256 units. Positions and velocities are integer FP 
 | `ECHO_ALPHA` | 0.45 | inside 30–60 % (4.7) |
 | `ECHO_TINTS` | `['#5ec8ff', '#ffb347', '#b78cff']` | |
 | `RUNE_STYLES` | `[{symbol:'◆',color:'#ff5ea8'}, {symbol:'▲',color:'#59e38c'}, {symbol:'●',color:'#ffd84d'}]` | one per pair (6.9) |
-
-**Note on RUNE_GAP_MIN.** Requirements 6.1 and 12.7 only bound gate right − rune right ≤ 30 × scroll speed. P9 also needs a minimum horizontal clearance, so that the Player's first gate-overlap Tick comes after the Echo's last Rune-overlap Tick, and so that the Echo witness is never near the gate column. This design adds `gateLeft − runeRight ≥ RUNE_GAP_MIN` as a generator constraint, checks it in `checkRunePlacement`, and assumes it in P9. Requirements 6.1 and 12.7 could adopt it in a later revision.
 
 **Difficulty table.** With `k = min(stage − 1, 19)` and `lerp(a, b) = a + trunc((b − a) · k / 19)`:
 
