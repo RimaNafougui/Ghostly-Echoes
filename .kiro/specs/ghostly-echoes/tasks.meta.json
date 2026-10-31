@@ -1,5 +1,14 @@
 {
-  "pbtResults": {},
+  "pbtResults": {
+    "2.3 Write property test for gate timing in `tests/gates.test.js`": {
+      "status": "passed",
+      "lastRunTimestamp": 1793488583250
+    },
+    "2.4 Write property test for crossing coverage in `tests/gates.test.js`": {
+      "status": "passed",
+      "lastRunTimestamp": 1793488745573
+    }
+  },
   "executionHistory": {
     "1.1 Create `src/constants.js` with all tunables": [
       {
@@ -42,6 +51,256 @@
         "executionId": "5f4b710a-c012-47aa-8bcb-d86d28dbabc1",
         "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
         "timestamp": 1793487195097
+      }
+    ],
+    "2.1 Create `src/physics.js`": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488280888
+      },
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488284280
+      },
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488388997
+      }
+    ],
+    "2.2 Create `src/gates.js`": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488280925
+      },
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488403256
+      },
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488451395
+      }
+    ],
+    "2.3 Write property test for gate timing in `tests/gates.test.js`": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488280951
+      },
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488456699
+      },
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488593242
+      }
+    ],
+    "2.4 Write property test for crossing coverage in `tests/gates.test.js`": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488280977
+      },
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488594134
+      },
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488753476
+      }
+    ],
+    "3.1 Create `src/recorder.js`": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488281002
+      }
+    ],
+    "3.3 Create `src/echoManager.js`": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488281038
+      }
+    ],
+    "4.1 Create `src/simulation.js`": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488281064
+      }
+    ],
+    "4.2 Create `src/main.js` with the pure `advanceAccumulator(accMs, elapsedMs)` helper": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488281091
+      }
+    ],
+    "4.3 Write property test for determinism in `tests/simulation.test.js`": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488281117
+      }
+    ],
+    "4.6 Write property test for the replay round-trip in `tests/replay.test.js`": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488281142
+      }
+    ],
+    "5. Checkpoint - Core simulation complete": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488281167
+      }
+    ],
+    "6.1 Create `src/stageGenerator.js` with difficulty, seeds and error type": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488281193
+      }
+    ],
+    "6.2 Implement the x skeleton, steering controller and Player witness": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488281218
+      }
+    ],
+    "6.3 Implement Echo witnesses": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488281242
+      }
+    ],
+    "6.4 Implement geometry placement": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488281268
+      }
+    ],
+    "6.5 Implement `selfCheck` and `checkRunePlacement`": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488281294
+      }
+    ],
+    "6.6 Write unit tests for difficulty and steering in `tests/stageGenerator.test.js`": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488281319
+      }
+    ],
+    "6.8 Write property test for solvability in `tests/stageGenerator.test.js`": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488281344
+      }
+    ],
+    "6.10 Write the generator smoke test in `tests/generatorSmoke.test.js`": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488281387
+      }
+    ],
+    "7. Checkpoint - Stage generation complete": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488281419
+      }
+    ],
+    "8.1 Create `src/game.js`": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488281446
+      }
+    ],
+    "8.2 Create `src/hud.js` with the pure `getHudModel(game)`": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488281470
+      }
+    ],
+    "9.1 Create `src/input.js`": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488281496
+      }
+    ],
+    "9.2 Create `src/audio.js`": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488281523
+      }
+    ],
+    "9.3 Create `src/renderer.js`": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488281550
+      }
+    ],
+    "9.4 Add `drawHud(ctx, model)` to `src/hud.js`": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488281575
+      }
+    ],
+    "10.1 Complete the browser bootstrap in `src/main.js`": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488281600
+      }
+    ],
+    "10.2 Create `index.html`": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488281626
+      }
+    ],
+    "11. Final checkpoint - Ensure all tests pass": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488281651
+      }
+    ],
+    "2. Implement physics and gate logic": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793488753507
       }
     ]
   }

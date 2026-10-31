@@ -38,34 +38,34 @@ The build order follows the design's module order: constants → rng → test ha
     - `stageSeed(BASE_SEED, n)` is pairwise distinct for Stages 1–50
     - _Requirements: 1.2, 9.5_
 
-- [ ] 2. Implement physics and gate logic
-  - [ ] 2.1 Create `src/physics.js`
+- [x] 2. Implement physics and gate logic
+  - [x] 2.1 Create `src/physics.js`
     - `stepGhost(g, flap)`: if flap then `vy = FLAP_VY`; then `vy += GRAVITY`; `y += vy`; `x += SCROLL_SPEED`, in exactly that order
     - `hitbox(g)`, inclusive `rectsIntersect(a, b)` (shared edges count as contact) and `outOfCourse(h)`
     - Pure functions only, with the UMD-style guarded export
     - _Requirements: 2.3, 2.4, 2.5, 4.2, 7.1, 7.2, 7.3, 7.6_
 
-  - [ ] 2.2 Create `src/gates.js`
+  - [x] 2.2 Create `src/gates.js`
     - `updateGates(gates, runes, echoHitboxes, tick)` takes Echo hitboxes only (no Player argument) and sets `lastEchoOverlapTick = tick` on any Echo–Rune intersection
     - `isGateOpen(gate, tick)` returns `lastEchoOverlapTick !== null && tick − lastEchoOverlapTick <= GATE_HOLD_TICKS`, so the initial `null` state means closed at Tick 0
     - Return new gate objects (pure)
     - _Requirements: 6.2, 6.3, 6.4, 6.5, 6.8, 6.13_
 
-  - [ ] 2.3 Write property test for gate timing in `tests/gates.test.js`
+  - [x] 2.3 Write property test for gate timing in `tests/gates.test.js`
     - **Property 5: Gate timing**
     - Random Rune layouts from `genRuneGatePair` (and/or `genCourse`), random Echo position sequences (up to 3,600 Ticks), oracle: open at N iff an Echo intersected the Rune on some Tick in `[max(0, N−30), N]`
     - Assert the gate state sequence is unchanged when the Player sequence is swapped for another one, including one that overlaps the Rune
     - Include an example: the Player alone over a Rune never opens the gate
     - **Validates: Requirements 6.8, 6.2, 6.3, 6.4, 6.5, 6.13**
 
-  - [ ] 2.4 Write property test for crossing coverage in `tests/gates.test.js`
+  - [x] 2.4 Write property test for crossing coverage in `tests/gates.test.js`
     - **Property 9: Crossing coverage**
     - Seeded random Rune/Rune_Gate pairs from `genRuneGatePair` satisfying 6.1 (gate right − rune right ≤ 30 × scroll speed, gate left − rune right ≥ `RUNE_GAP_MIN`) and seeded Echo paths that intersect the Rune and are truncated at their last Rune-overlap Tick
     - Assert the gate is open on every Tick on which a Player hitbox at the same x intersects the gate's area
     - **Validates: Requirements 12.7, 6.1, 6.3**
 
 - [ ] 3. Implement recording and Echo storage
-  - [ ] 3.1 Create `src/recorder.js`
+  - [~] 3.1 Create `src/recorder.js`
     - `createRecorder()` returning `begin()`, `append(flag)`, `finalize()` and `isRecording()`
     - `begin()` starts a fresh empty array, `append` pushes exactly one boolean per Tick and is a no-op while idle
     - `finalize()` stops recording and returns `Object.freeze(array)`, or `null` for a zero-length log
@@ -75,7 +75,7 @@ The build order follows the design's module order: constants → rng → test ha
     - One entry per simulated Tick, log length after death includes the death Tick, length after restart, frozen logs reject mutation, `null` for zero length, no appends before `begin` or after `finalize`, separate logs per Run
     - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8_
 
-  - [ ] 3.3 Create `src/echoManager.js`
+  - [~] 3.3 Create `src/echoManager.js`
     - Pure `emptyEchoes()` and `storeEcho(echoes, log)`: drop `echoes[0]` when 3 are held, then append `{ log, tintIndex, seq }`
     - `tintIndex` is the smallest index in `{0, 1, 2}` not used by the retained entries; logs are stored by reference (already frozen)
     - _Requirements: 4.8, 5.1, 5.2, 5.3, 5.4, 5.7, 5.8_
@@ -90,7 +90,7 @@ The build order follows the design's module order: constants → rng → test ha
     - _Requirements: 5.3, 5.7_
 
 - [ ] 4. Implement the Simulation and frame accumulator
-  - [ ] 4.1 Create `src/simulation.js`
+  - [~] 4.1 Create `src/simulation.js`
     - `createRunState(course, echoes)`: Player and every Echo at the Tick-0 start state, gates with `lastEchoOverlapTick = null`, `tick = 0`, `status = 'running'`
     - `stepSimulation(course, state, flap)` in the design's per-Tick order: Player step if alive → each active Echo steps with `log[t]` (missing entries = no flap) → `updateGates` from Echo hitboxes only → Player death checks (walls, Hazards, closed gates, top/bottom edges, inclusive) → finish check only if alive → remove Echoes whose `log.length − 1 === t` → `tick += 1`
     - Return a new state plus `events = { flapped, died, cleared }`, with `died` emitted at most once and the dead Player frozen
@@ -98,13 +98,13 @@ The build order follows the design's module order: constants → rng → test ha
     - Echoes never collide with terrain, gates, edges or other Ghosts
     - _Requirements: 1.1, 1.3, 1.9, 2.3, 2.4, 2.5, 4.1, 4.2, 4.4, 4.5, 4.6, 6.6, 6.7, 6.10, 6.11, 6.13, 7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.7, 7.8, 8.7, 9.1_
 
-  - [ ] 4.2 Create `src/main.js` with the pure `advanceAccumulator(accMs, elapsedMs)` helper
+  - [~] 4.2 Create `src/main.js` with the pure `advanceAccumulator(accMs, elapsedMs)` helper
     - `TICK_MS = 1000 / 60`, `EPS = 1e-6`, NaN or negative elapsed treated as 0
     - More than 5 Ticks accumulated → `{ ticks: 5, accMs: 0 }`; otherwise floor the Tick count and carry the remainder
     - Export it through the UMD-style guard; leave the browser bootstrap for task 10.1, guarded so the file loads in Node
     - _Requirements: 1.7, 1.8_
 
-  - [ ] 4.3 Write property test for determinism in `tests/simulation.test.js`
+  - [~] 4.3 Write property test for determinism in `tests/simulation.test.js`
     - **Property 1: Determinism**
     - Random seeds, random test Courses from `genCourse`, 0–3 Echo logs and Input_Logs up to 3,600 Ticks; two runs from the same initial state are deep-equal at every Tick and `tick` increases by exactly 1 per step
     - **Validates: Requirements 1.5, 1.1, 1.3, 2.8**
@@ -119,7 +119,7 @@ The build order follows the design's module order: constants → rng → test ha
     - Frame rates 30–240 fps with ±20 % per-frame jitter driven through `advanceAccumulator` (excluding frame gaps over 5 Ticks), compared with direct Tick-by-Tick stepping of the same Input_Log
     - **Validates: Requirements 1.10, 1.7**
 
-  - [ ] 4.6 Write property test for the replay round-trip in `tests/replay.test.js`
+  - [~] 4.6 Write property test for the replay round-trip in `tests/replay.test.js`
     - **Property 3: Replay round-trip**
     - Record a random Player Run on a random Course with walls, Hazards and gates from `genCourse`, then replay the finalized log as an Echo alongside up to 2 other random Echoes; assert exact `x`, `y`, `vy` equality at every Tick 0..last and absence of the Echo on later Ticks
     - **Validates: Requirements 4.3, 4.1, 4.2, 4.4, 4.5, 4.6, 6.10, 7.7, 2.5**
@@ -134,24 +134,24 @@ The build order follows the design's module order: constants → rng → test ha
     - Assert each core file loads via `require` with no DOM globals defined
     - _Requirements: 1.2, 1.6, 11.7, 11.8, 12.2_
 
-- [ ] 5. Checkpoint - Core simulation complete
+- [~] 5. Checkpoint - Core simulation complete
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 6. Implement the Stage_Generator
-  - [ ] 6.1 Create `src/stageGenerator.js` with difficulty, seeds and error type
+  - [~] 6.1 Create `src/stageGenerator.js` with difficulty, seeds and error type
     - `difficulty(stage)` with `k = min(stage − 1, 19)` and integer `lerp`: `gapPx` 200 → 120, `spacingPx` 520 → 380, `hazardPerMille` 0 → 600, `gateCount = min(3, 1 + trunc(2k / 13))`
     - `GeneratorError extends Error` with `stage`, `seed` and `reason`
     - `generateStage(stage, opts)` entry point that computes `seed = stageSeed(BASE_SEED, stage, seedSalt)`, creates the RNG and resolves `params = paramsOverride ?? difficulty(stage)` with `gateCount` always from `difficulty(stage)`
     - _Requirements: 9.5, 9.7, 9.11, A7_
 
-  - [ ] 6.2 Implement the x skeleton, steering controller and Player witness
+  - [~] 6.2 Implement the x skeleton, steering controller and Player witness
     - Build the x-only skeleton: runway, per gate 2 regular columns at `spacingPx`, an `APPROACH_PX` approach zone and a `GATE_W` gate column, then 2 trailing columns and `finishX = lastColumnRight + FINISH_MARGIN_PX`
     - Pick passage targets with the RNG: gate half chosen per gate, gate `cy` ≥ `MIDLINE_CLEARANCE_PX` (100 px) from the midline, Rune target `ry_k` in the opposite half (`[80, 140]` or `[340, 400]`)
     - `steer(g, targetY)`: flap iff `g.y + 16·FP + 8·g.vy > (targetY + STEER_BIAS)·FP`, switching to the next column's target once the hitbox left edge passes the previous column's right edge
     - Generate the Player witness log by running `steer` + `stepGhost` from Tick 0 until `x ≥ finishX`, before any wall or Hazard exists
     - _Requirements: 9.8, 9.9_
 
-  - [ ] 6.3 Implement Echo witnesses
+  - [~] 6.3 Implement Echo witnesses
     - Divergence Tick `D_k`: first Tick the witness hitbox left edge passes the last regular column before gate `k`'s approach zone; Echo `k` shares the Player log on `[0, D_k)` and then steers to `ry_k`
     - Rune x first: `runeGap = rng.nextInt(RUNE_GAP_MIN, RUNE_GAP_MAX)`, `runeRight = gateLeft − runeGap`, `runeLeft = runeRight − RUNE_W`
     - Simulate the Echo, find the crossing Tick `c_k` (Echo hitbox center x ≥ Rune center x) and center the Rune vertically on the Echo hitbox center at `c_k`
@@ -159,20 +159,20 @@ The build order follows the design's module order: constants → rng → test ha
     - Truncate the Echo log to `L_k + 1` entries, where `L_k` is the last Tick the Echo hitbox intersects the placed Rune
     - _Requirements: 6.1, 9.8, 9.9, A15, A18_
 
-  - [ ] 6.4 Implement geometry placement
+  - [~] 6.4 Implement geometry placement
     - For each column, passage = `[minTop − PASSAGE_PAD, maxBottom + PASSAGE_PAD]` over all alive witness hitboxes overlapping the column's x-span (Player and untruncated Echo prefixes), widened symmetrically to ≥ `gapPx`, shifted (not shrunk) into `[0, COURSE_H]`; walls fill above and below
     - Gate rect fills the gate column's passage, with `styleIndex = k` and `runes[k]` linked 1:1
     - Hazards: for each gap between regular columns (not approach zones), `rng.chance(hazardPerMille)` places a 24×24 Hazard at the gap's x-center, y scanned in 4 px steps for maximum clearance from alive witness hitboxes and Course edges, skipped if clearance < 16 px
     - Assemble the `Course` object from the design's data model, including `witness: { player, echoes }`
     - _Requirements: 6.1, 9.9, 9.11_
 
-  - [ ] 6.5 Implement `selfCheck` and `checkRunePlacement`
+  - [~] 6.5 Implement `selfCheck` and `checkRunePlacement`
     - `checkRunePlacement(course)`: rune right < gate left; gate right − rune right ≤ 30 × scroll speed; gate left − rune right ≥ `RUNE_GAP_MIN`; Rune center in the opposite vertical half from the passage center; throws `GeneratorError`
     - `selfCheck(course)`: witness replay clears with no death; each Echo `k` played as the Player with Echoes `1..k−1` stays alive through its last Tick; `checkRunePlacement`; `1 ≤ gateCount ≤ 3`; every passage ≥ 2 × `PLAYER_H`
     - Call `selfCheck` at the end of `generateStage`; no candidate retry loop
     - _Requirements: 6.1, 9.9, 9.10, 9.11, 9.12_
 
-  - [ ] 6.6 Write unit tests for difficulty and steering in `tests/stageGenerator.test.js`
+  - [~] 6.6 Write unit tests for difficulty and steering in `tests/stageGenerator.test.js`
     - Difficulty table is monotone (gap and spacing non-increasing, Hazard rate and gate count non-decreasing), fixed from Stage 20 on, gap limit ≥ 2 × `PLAYER_H`
     - Stage 1 has exactly 1 gate
     - Steering hover-band check: for flat targets in the clamp range, the steady-state hitbox center stays within −30..+26 px of the target
@@ -184,7 +184,7 @@ The build order follows the design's module order: constants → rng → test ha
     - Compute a canonical fingerprint (hash of the serialized Course for Stages 1–50) and compare it with a checked-in golden value
     - **Validates: Requirements 9.6**
 
-  - [ ] 6.8 Write property test for solvability in `tests/stageGenerator.test.js`
+  - [~] 6.8 Write property test for solvability in `tests/stageGenerator.test.js`
     - **Property 7: Solvability**
     - For Stages 1–50, `replayHeadless` with the witness Echo logs as Echoes and the Player log as the Player clears with no death; each Echo witness `k` played as the Player with Echoes `1..k−1` stays alive through its last Tick; 1–3 Echo witness logs, each no longer than the Ticks to the Finish_Line
     - Also check determinism (Property 1) on generated Stages 1–50: two replays of the witness logs on each generated Course are deep-equal at every Tick
@@ -195,15 +195,15 @@ The build order follows the design's module order: constants → rng → test ha
     - For Stages 1–50 and every pair: 1:1 pairing, rune right < gate left, gate right − rune right ≤ 30 × scroll speed, gate left − rune right ≥ `RUNE_GAP_MIN`, opposite vertical halves; `1 ≤ gateCount ≤ 3` (exactly 1 on Stage 1); every passage ≥ 2 × `PLAYER_H`
     - **Validates: Requirements 9.12, 6.1, 9.11**
 
-  - [ ] 6.10 Write the generator smoke test in `tests/generatorSmoke.test.js`
+  - [~] 6.10 Write the generator smoke test in `tests/generatorSmoke.test.js`
     - Stages 1–300: `generateStage` + `selfCheck` do not throw, placement invariants hold, gate count is 1–3
     - _Requirements: 9.2, 9.11, 9.12_
 
-- [ ] 7. Checkpoint - Stage generation complete
+- [~] 7. Checkpoint - Stage generation complete
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 8. Implement the Game state machine and HUD model
-  - [ ] 8.1 Create `src/game.js`
+  - [~] 8.1 Create `src/game.js`
     - `createGame({ generate = generateStage })`, `loadStage(game, stage)`, `fixedStep(game, { flap, restart })` and `isAcceptingFlaps(game)`, all DOM-free
     - `waitingForFirstFlap`: on flap create the RunState, `recorder.begin()`, simulate Tick 0 with the flap and append it; ignore R and other inputs
     - `running`: R (before stepping) finalizes the log, stores the Echo if non-null, `attempt += 1`, returns to waiting with 0 delay; otherwise step and append; on `died` store the Echo and start the 60-step post-death Countdown; on `cleared` discard the log and start the 60-step post-clear Countdown
@@ -212,7 +212,7 @@ The build order follows the design's module order: constants → rng → test ha
     - Forward Simulation `events` (`flapped`, `died`, `cleared`) for audio
     - _Requirements: 2.6, 5.1, 5.6, 5.7, 8.1, 8.2, 8.3, 8.4, 8.5, 8.6, 8.7, 8.8, 8.9, 8.10, 9.2, 9.3, 9.4, 11.4, A6, A9, A16_
 
-  - [ ] 8.2 Create `src/hud.js` with the pure `getHudModel(game)`
+  - [~] 8.2 Create `src/hud.js` with the pure `getHudModel(game)`
     - Return `{ lines: ['Stage: S', 'Attempt: N', 'Echoes: X/3'], hint }` with the Stage 1 hint only on Stage 1, `null` otherwise, in every mode including Countdowns
     - Read-only access to Game state; UMD-style guarded export
     - _Requirements: 10.1, 10.2, 10.3, 10.6, 10.7, 10.8_
@@ -234,18 +234,18 @@ The build order follows the design's module order: constants → rng → test ha
     - _Requirements: 10.1, 10.2, 10.3, 10.4, 10.6, 10.7, 10.8_
 
 - [ ] 9. Implement the browser shell
-  - [ ] 9.1 Create `src/input.js`
+  - [~] 9.1 Create `src/input.js`
     - `createInputHandler(target, canvas, isAcceptingFlaps)`: non-repeat `Space`/`ArrowUp` keydown anywhere, `mousedown` with `button === 0` on the canvas, `touchstart` on the canvas
     - `preventDefault()` on Space/ArrowUp keydown and touchstart; queue flaps only when `isAcceptingFlaps()` is true
     - Non-repeat `KeyR` keydown sets `restart = true`; `drain()` returns `{ flap: queue > 0, restart }` and clears both
     - _Requirements: 2.1, 2.2, 2.6, 2.7, 8.4, A12_
 
-  - [ ] 9.2 Create `src/audio.js`
+  - [~] 9.2 Create `src/audio.js`
     - `createAudio(srcs)` with `Audio` elements for `assets/jump.wav` and `assets/game_over.wav`, `unlock()` on the first gesture, `play(name)` resetting `currentTime` inside try/catch with `.catch(() => {})` on the Promise
     - Load errors mark a sound unavailable and turn `play` into a no-op
     - _Requirements: 7.4, 7.5, 7.9_
 
-  - [ ] 9.3 Create `src/renderer.js`
+  - [~] 9.3 Create `src/renderer.js`
     - `createRenderer(ctx, image)` with camera `camX = player.x − PLAYER_START_X`
     - Draw order: background, walls, Hazards, Runes and gates in `RUNE_STYLES[k]` (closed = solid bar, open = dashed outline at 25 % alpha), Echoes, Player, then HUD
     - Echo tints from per-tint offscreen canvases (sprite + `source-atop` fill) drawn at `ECHO_ALPHA`; Player via `drawImage` scaled to 32×32 when the image is ready
@@ -253,7 +253,7 @@ The build order follows the design's module order: constants → rng → test ha
     - Draw the error screen ("Reload to try again") in `'error'` mode and the non-fatal `notice` if set
     - _Requirements: 4.7, 4.8, 6.9, 6.12, 10.5, 11.3, 11.5_
 
-  - [ ] 9.4 Add `drawHud(ctx, model)` to `src/hud.js`
+  - [~] 9.4 Add `drawHud(ctx, model)` to `src/hud.js`
     - Stats top-left at 16 px with 12 px margins; hint word-wrapped to `COURSE_W − 24`, bottom-aligned 12 px above the canvas bottom and only drawn if it stays below the stats block
     - Keep all HUD text inside canvas bounds; keep `getHudModel` DOM-free and guard `drawHud` so the file still loads in Node
     - _Requirements: 10.4, 10.5, 10.7_
@@ -264,14 +264,14 @@ The build order follows the design's module order: constants → rng → test ha
     - _Requirements: 2.1, 2.2, 2.6, 2.7, 7.9, 8.4_
 
 - [ ] 10. Wire everything together
-  - [ ] 10.1 Complete the browser bootstrap in `src/main.js`
+  - [~] 10.1 Complete the browser bootstrap in `src/main.js`
     - Load `assets/ghosty.png` (`onload` sets ready, `onerror` keeps the fallback), create the Game and `loadStage(1)`, create input, audio and renderer
     - `requestAnimationFrame` loop: `advanceAccumulator`, run `fixedStep(game, input.drain())` once per Tick, play `jump.wav` on `flapped` and `game_over.wav` on `died`, then `renderer.draw(game)`
     - On `visibilitychange` to visible reset `lastTime = performance.now()` and `accMs = 0`
     - Keep the bootstrap guarded by `typeof document !== 'undefined'` so `advanceAccumulator` still loads in Node
     - _Requirements: 1.7, 1.8, 7.4, 7.5, 11.1, 11.3, 11.4, 11.5_
 
-  - [ ] 10.2 Create `index.html`
+  - [~] 10.2 Create `index.html`
     - A canvas sized `COURSE_W × COURSE_H` and classic `<script src>` tags with relative paths in order: constants, rng, physics, gates, recorder, echoManager, simulation, stageGenerator, game, hud, input, audio, renderer, main
     - No `type="module"`, no external URLs, no storage APIs
     - _Requirements: 11.1, 11.2, 11.4, 11.6_
@@ -282,7 +282,7 @@ The build order follows the design's module order: constants → rng → test ha
     - Assert there is no `package.json` dependency list (or no `package.json` at all)
     - _Requirements: 11.2, 11.4, 11.6, 12.1_
 
-- [ ] 11. Final checkpoint - Ensure all tests pass
+- [~] 11. Final checkpoint - Ensure all tests pass
   - Ensure all tests pass with `node --test`, ask the user if questions arise.
 
 ## Notes
