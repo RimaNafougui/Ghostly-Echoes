@@ -134,7 +134,7 @@ The build order follows the design's module order: constants → rng → test ha
     - Assert each core file loads via `require` with no DOM globals defined
     - _Requirements: 1.2, 1.6, 11.7, 11.8, 12.2_
 
-- [~] 5. Checkpoint - Core simulation complete
+- [x] 5. Checkpoint - Core simulation complete
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 6. Implement the Stage_Generator
