@@ -64,8 +64,8 @@ The build order follows the design's module order: constants → rng → test ha
     - Assert the gate is open on every Tick on which a Player hitbox at the same x intersects the gate's area
     - **Validates: Requirements 12.7, 6.1, 6.3**
 
-- [ ] 3. Implement recording and Echo storage
-  - [~] 3.1 Create `src/recorder.js`
+- [x] 3. Implement recording and Echo storage
+  - [x] 3.1 Create `src/recorder.js`
     - `createRecorder()` returning `begin()`, `append(flag)`, `finalize()` and `isRecording()`
     - `begin()` starts a fresh empty array, `append` pushes exactly one boolean per Tick and is a no-op while idle
     - `finalize()` stops recording and returns `Object.freeze(array)`, or `null` for a zero-length log
@@ -75,7 +75,7 @@ The build order follows the design's module order: constants → rng → test ha
     - One entry per simulated Tick, log length after death includes the death Tick, length after restart, frozen logs reject mutation, `null` for zero length, no appends before `begin` or after `finalize`, separate logs per Run
     - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8_
 
-  - [~] 3.3 Create `src/echoManager.js`
+  - [x] 3.3 Create `src/echoManager.js`
     - Pure `emptyEchoes()` and `storeEcho(echoes, log)`: drop `echoes[0]` when 3 are held, then append `{ log, tintIndex, seq }`
     - `tintIndex` is the smallest index in `{0, 1, 2}` not used by the retained entries; logs are stored by reference (already frozen)
     - _Requirements: 4.8, 5.1, 5.2, 5.3, 5.4, 5.7, 5.8_
