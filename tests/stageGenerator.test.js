@@ -137,6 +137,13 @@ test('Property 7: Solvability - witness replays clear Stages 1-50 with no death'
     assert.equal(echoes.length, course.gates.length, where + ': Echo witness count differs from gate count');
     assert.ok(player.length > 0, where + ': empty Player witness log');
 
+    // 8.9: a real Run starts by simulating Tick 0 with a Flap, so every
+    // witness log must start with a Flap to be recordable through the Game.
+    assert.equal(player[0], true, where + ': Player witness does not flap on Tick 0');
+    echoes.forEach((log, k) => {
+      assert.equal(log[0], true, where + ': Echo witness ' + k + ' does not flap on Tick 0');
+    });
+
     // 9.10: Player witness with all Echo witnesses clears with no death.
     const res = replayHeadless(course, player, echoes, { maxTicks: player.length });
     assert.equal(res.deathTick, null, where + ': Player witness dies at Tick ' + res.deathTick);
@@ -173,5 +180,48 @@ test('Property 7: Solvability - witness replays clear Stages 1-50 with no death'
     assert.equal(again.outcome, res.outcome, where + ': outcomes differ');
     assert.equal(again.deathTick, res.deathTick, where + ': death Ticks differ');
     assert.equal(again.clearTick, res.clearTick, where + ': clear Ticks differ');
+  }
+});
+
+// ---------------------------------------------------------------------------
+// Witnesses are recordable through the real Game API (8.3, 8.9, 9.9, 9.10)
+// ---------------------------------------------------------------------------
+
+// Drives src/game.js with fixedStep only: each Echo witness k is played as
+// the Player (Echoes 0..k-1 already stored), then R is pressed on the step
+// after its last Tick; finally the Player witness is played and must clear.
+const gameApi = core.game;
+const GAME_STAGES = [1, 2, 8, 14, 20, 50];
+
+test('Solution_Witness can be recorded and cleared through the Game API', () => {
+  const { createGame, loadStage, fixedStep, MODES } = gameApi;
+  for (const stage of GAME_STAGES) {
+    const where = 'Stage ' + stage;
+    let game = loadStage(createGame(), stage);
+    assert.equal(game.mode, MODES.WAITING, where + ': not waiting after loadStage');
+    const { player, echoes } = game.course.witness;
+
+    const play = (log, label) => {
+      for (let i = 0; i < log.length; i++) {
+        game = fixedStep(game, { flap: log[i], restart: false }).game;
+        if (i < log.length - 1) {
+          assert.equal(game.mode, MODES.RUNNING, where + ': ' + label + ' left running at Tick ' + i);
+        }
+      }
+    };
+
+    echoes.forEach((log, k) => {
+      play(log, 'Echo witness ' + k);
+      assert.equal(game.mode, MODES.RUNNING, where + ': Echo witness ' + k + ' not running at its last Tick');
+      assert.equal(game.run.tick, log.length, where + ': Echo witness ' + k + ' Tick count');
+      game = fixedStep(game, { flap: false, restart: true }).game;
+      assert.equal(game.mode, MODES.WAITING, where + ': R did not restart');
+      assert.equal(game.echoes.length, k + 1, where + ': Echo ' + k + ' not stored');
+      assert.deepEqual([...game.echoes[k].log], [...log], where + ': recorded Echo ' + k + ' differs from witness');
+    });
+
+    play(player, 'Player witness');
+    assert.equal(game.mode, MODES.POST_CLEAR, where + ': Player witness did not clear (mode ' + game.mode + ')');
+    assert.equal(game.attempt, echoes.length + 1, where + ': attempt number');
   }
 });

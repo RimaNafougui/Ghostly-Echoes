@@ -20,6 +20,7 @@
  *      - checkRunePlacement: 1:1 pairing, rune right < gate left,
  *        gate right - rune right <= 30 x scroll speed,
  *        gate left - rune right >= RUNE_GAP_MIN, opposite vertical halves
+ *      - every witness log starts with a Flap on Tick 0 (8.9)
  *      - witness replay clears with no death
  *      - Echo k as the Player with Echoes 0..k-1 survives its whole log
  * selfCheck throws GeneratorError on failure. There is no candidate retry
@@ -289,20 +290,23 @@
   // Pipeline step 3: Player witness (design 5)
   // ---------------------------------------------------------------------
 
-  // The Player witness steers to the cy of the next column ahead, starting
-  // from the Tick-0 state, until x >= finishX. No geometry exists yet.
+  // The Player witness flaps on Tick 0, as every real Run does (8.9: the
+  // first Flap starts the Run and is applied on Tick 0). From Tick 1 on it
+  // steers to the cy of the next column ahead until x >= finishX. No
+  // geometry exists yet.
   function buildPlayerWitness(setup, skeleton) {
     var columns = skeleton.columns;
     var cursor = 0;
     var start = Object.freeze({ x: C.PLAYER_START_X * FP, y: C.PLAYER_START_Y * FP, vy: 0 });
-    var run = runController(start, skeleton.finishX, function (g) {
+    var first = Object.freeze(deps.physics.stepGhost(start, true));
+    var run = runController(first, skeleton.finishX, function (g) {
       cursor = activeColumnIndex(columns, g.x, cursor);
       return columns[cursor].targetPx;
     });
     return Object.freeze({
-      log: Object.freeze(run.log),
+      log: Object.freeze([true].concat(run.log)),
       start: start,
-      states: Object.freeze(run.states) // states[t] = Player Ghost after Tick t
+      states: Object.freeze([first].concat(run.states)) // states[t] = Player Ghost after Tick t
     });
   }
 
@@ -374,6 +378,9 @@
     var lastRegular = skeleton.columns[gate.lastRegularColumnIndex];
     var D = divergenceTick(playerWitness, lastRegular.right);
     if (D < 0) throw fail('divergence Tick not found');
+    // The shared prefix must include Tick 0, so the Echo log starts with the
+    // Player witness's Tick-0 Flap (8.9).
+    if (D < 1) throw fail('divergence Tick before Tick 1');
     if (preTickState(playerWitness, D).x > runeRight) throw fail('divergence after Rune');
 
     var ry = gate.runeTargetPx;
@@ -750,6 +757,15 @@
     var echoes = witness.echoes;
     if (echoes.length < 1 || echoes.length > 3) {
       throw courseError(course, 'witness has ' + echoes.length + ' Echo logs, expected 1..3');
+    }
+
+    // Every witness log starts with a Flap on Tick 0, so it can be recorded
+    // through the Game, where the first Flap starts the Run (8.9).
+    var startsWithFlap = function (log) {
+      return log.length > 0 && log[0] === true;
+    };
+    if (!startsWithFlap(witness.player) || !echoes.every(startsWithFlap)) {
+      throw courseError(course, 'witness log does not start with a Flap');
     }
 
     // Full witness replay clears with no death (9.10). The margin lets a
