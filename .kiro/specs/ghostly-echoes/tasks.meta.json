@@ -18,7 +18,7 @@
     },
     "6.8 Write property test for solvability in `tests/stageGenerator.test.js`": {
       "status": "passed",
-      "lastRunTimestamp": 1793490309591
+      "lastRunTimestamp": 1793491302781
     }
   },
   "executionHistory": {
@@ -284,6 +284,16 @@
         "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
         "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
         "timestamp": 1793489581917
+      },
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793490950366
+      },
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793491352329
       }
     ],
     "6.3 Implement Echo witnesses": [
@@ -410,6 +420,16 @@
         "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
         "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
         "timestamp": 1793488281446
+      },
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793490433810
+      },
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793490901931
       }
     ],
     "8.2 Create `src/hud.js` with the pure `getHudModel(game)`": [
@@ -417,6 +437,16 @@
         "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
         "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
         "timestamp": 1793488281470
+      },
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793491352307
+      },
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793491410622
       }
     ],
     "9.1 Create `src/input.js`": [
@@ -494,6 +524,13 @@
         "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
         "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
         "timestamp": 1793490395558
+      }
+    ],
+    "8. Implement the Game state machine and HUD model": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793491410653
       }
     ]
   }

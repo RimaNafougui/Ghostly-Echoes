@@ -202,8 +202,8 @@ The build order follows the design's module order: constants → rng → test ha
 - [x] 7. Checkpoint - Stage generation complete
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 8. Implement the Game state machine and HUD model
-  - [~] 8.1 Create `src/game.js`
+- [x] 8. Implement the Game state machine and HUD model
+  - [x] 8.1 Create `src/game.js`
     - `createGame({ generate = generateStage })`, `loadStage(game, stage)`, `fixedStep(game, { flap, restart })` and `isAcceptingFlaps(game)`, all DOM-free
     - `waitingForFirstFlap`: on flap create the RunState, `recorder.begin()`, simulate Tick 0 with the flap and append it; ignore R and other inputs
     - `running`: R (before stepping) finalizes the log, stores the Echo if non-null, `attempt += 1`, returns to waiting with 0 delay; otherwise step and append; on `died` store the Echo and start the 60-step post-death Countdown; on `cleared` discard the log and start the 60-step post-clear Countdown
@@ -212,7 +212,7 @@ The build order follows the design's module order: constants → rng → test ha
     - Forward Simulation `events` (`flapped`, `died`, `cleared`) for audio
     - _Requirements: 2.6, 5.1, 5.6, 5.7, 8.1, 8.2, 8.3, 8.4, 8.5, 8.6, 8.7, 8.8, 8.9, 8.10, 9.2, 9.3, 9.4, 11.4, A6, A9, A16_
 
-  - [~] 8.2 Create `src/hud.js` with the pure `getHudModel(game)`
+  - [x] 8.2 Create `src/hud.js` with the pure `getHudModel(game)`
     - Return `{ lines: ['Stage: S', 'Attempt: N', 'Echoes: X/3'], hint }` with the Stage 1 hint only on Stage 1, `null` otherwise, in every mode including Countdowns
     - Read-only access to Game state; UMD-style guarded export
     - _Requirements: 10.1, 10.2, 10.3, 10.6, 10.7, 10.8_
