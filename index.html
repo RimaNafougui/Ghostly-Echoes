@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ghostly Echoes</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #0e0f1a;
+      color: #d8dcf0;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    main {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 12px;
+      box-sizing: border-box;
+    }
+    canvas {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      background: #161829;
+      touch-action: none; /* stop touch scrolling/zooming on the canvas (2.7) */
+    }
+    canvas:focus-visible {
+      outline: 2px solid #5ec8ff;
+      outline-offset: 2px;
+    }
+    .controls {
+      margin: 0;
+      font-size: 14px;
+      text-align: center;
+    }
+    kbd {
+      padding: 1px 5px;
+      border: 1px solid #5a5f80;
+      border-radius: 3px;
+      font-family: inherit;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <canvas id="game" width="800" height="480" tabindex="0"
+      aria-label="Ghostly Echoes game. Press Space, the Up arrow, click or tap to flap. Press R to restart the attempt and leave an echo behind."></canvas>
+    <p class="controls">
+      <kbd>Space</kbd> / <kbd>&uarr;</kbd> / click / tap to flap &middot; <kbd>R</kbd> to restart
+    </p>
+  </main>
+
+  <!-- Classic scripts with relative paths, in dependency order (11.2). -->
+  <script src="src/constants.js"></script>
+  <script src="src/rng.js"></script>
+  <script src="src/physics.js"></script>
+  <script src="src/gates.js"></script>
+  <script src="src/recorder.js"></script>
+  <script src="src/echoManager.js"></script>
+  <script src="src/simulation.js"></script>
+  <script src="src/stageGenerator.js"></script>
+  <script src="src/game.js"></script>
+  <script src="src/hud.js"></script>
+  <script src="src/input.js"></script>
+  <script src="src/audio.js"></script>
+  <script src="src/renderer.js"></script>
+  <script src="src/main.js"></script>
+</body>
+</html>

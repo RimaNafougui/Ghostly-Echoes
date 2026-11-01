@@ -263,15 +263,15 @@ The build order follows the design's module order: constants → rng → test ha
     - Fake `Audio` whose `play()` rejects or throws: `play(name)` never throws
     - _Requirements: 2.1, 2.2, 2.6, 2.7, 7.9, 8.4_
 
-- [ ] 10. Wire everything together
-  - [~] 10.1 Complete the browser bootstrap in `src/main.js`
+- [x] 10. Wire everything together
+  - [x] 10.1 Complete the browser bootstrap in `src/main.js`
     - Load `assets/ghosty.png` (`onload` sets ready, `onerror` keeps the fallback), create the Game and `loadStage(1)`, create input, audio and renderer
     - `requestAnimationFrame` loop: `advanceAccumulator`, run `fixedStep(game, input.drain())` once per Tick, play `jump.wav` on `flapped` and `game_over.wav` on `died`, then `renderer.draw(game)`
     - On `visibilitychange` to visible reset `lastTime = performance.now()` and `accMs = 0`
     - Keep the bootstrap guarded by `typeof document !== 'undefined'` so `advanceAccumulator` still loads in Node
     - _Requirements: 1.7, 1.8, 7.4, 7.5, 11.1, 11.3, 11.4, 11.5_
 
-  - [~] 10.2 Create `index.html`
+  - [x] 10.2 Create `index.html`
     - A canvas sized `COURSE_W × COURSE_H` and classic `<script src>` tags with relative paths in order: constants, rng, physics, gates, recorder, echoManager, simulation, stageGenerator, game, hud, input, audio, renderer, main
     - No `type="module"`, no external URLs, no storage APIs
     - _Requirements: 11.1, 11.2, 11.4, 11.6_
