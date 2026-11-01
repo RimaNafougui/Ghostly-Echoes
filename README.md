@@ -4,9 +4,13 @@ A ghost runner where your failures become your teammates. Every time you die or 
 
 ## Screenshots
 
-![Stage 1 at the start of Attempt 1: the white ghost floats on the left, a wall with a gap lies ahead, the HUD reads Stage 1, Attempt 1, Echoes 0/3, and the hint at the bottom says to fly through the rune, press R once past it, then let your echo open the gate.](img/gameplay-start.png)
+![Stage 1, Attempt 1: the white ghost floats in front of a red-brown brick wall, with a pale stone pillar ahead that has a gap in the middle. The HUD reads Stage 1, Attempt 1, Echoes 0/3, and the hint at the bottom says to fly through the rune, press R once past it, then let your echo open the gate.](img/gameplay-start.png)
 
-![Attempt 2 on Stage 1: a translucent blue Echo overlaps the pink diamond rune near the top, which holds the matching pink gate below open (drawn as a dashed outline), while the white Player ghost lines up to fly through it. The HUD reads Attempt 2, Echoes 1/3.](img/gameplay-echo.png)
+![Attempt 2 on Stage 1: a translucent teal Echo rests on the pale-blue diamond rune near the top of the brick wall, so the matching gate between the stone pillars below is open and drawn as a dashed outline, while the white Player ghost lines up to pass through it. The HUD reads Attempt 2, Echoes 1/3.](img/gameplay-echo.png)
+
+![Attempt 2 on Stage 1: the white Player ghost flies through the open gate, drawn as a dashed outline between two stone pillars, while the pale-blue diamond rune above sits empty because the Echo has already left it.](img/gameplay-gate.png)
+
+*The Echo has already left the rune, but the gate stays open for another half second, long enough to fly through.*
 
 ## How to play
 
