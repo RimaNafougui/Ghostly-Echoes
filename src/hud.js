@@ -65,8 +65,11 @@
   var HUD_LINE_H = 20;
   var HUD_MARGIN = 12;
   var HUD_FONT = HUD_FONT_PX + 'px sans-serif';
-  var HUD_TEXT = '#ffffff';
+  var HUD_TEXT = C.PALETTE && C.PALETTE.text ? C.PALETTE.text : '#ffffff';
+  var HUD_BACKING = C.PALETTE && C.PALETTE.textBacking ? C.PALETTE.textBacking : 'rgba(0, 0, 0, 0.7)';
   var HUD_SHADOW = 'rgba(0, 0, 0, 0.85)';
+  var HUD_PAD_X = 6;
+  var HUD_PAD_Y = 4;
 
   function textWidth(ctx, text) {
     var m = ctx.measureText(text);
@@ -111,9 +114,28 @@
     return lines;
   }
 
+  // Dark semi-transparent panel behind HUD text, clamped to the canvas.
+  function drawBacking(ctx, x, y, w, h) {
+    var l = Math.max(0, x);
+    var t = Math.max(0, y);
+    var r = Math.min(C.COURSE_W, x + w);
+    var b = Math.min(C.COURSE_H, y + h);
+    if (r <= l || b <= t) return;
+    ctx.fillStyle = HUD_BACKING;
+    ctx.fillRect(l, t, r - l, b - t);
+  }
+
+  function widestLine(ctx, lines, maxWidth) {
+    var widest = 0;
+    for (var i = 0; i < lines.length; i++) widest = Math.max(widest, textWidth(ctx, String(lines[i])));
+    return Math.min(maxWidth, widest);
+  }
+
   // Stats top-left (16 px font, 12 px margins). Hint word-wrapped to
   // COURSE_W - 24, bottom-aligned 12 px above the canvas bottom, drawn only
-  // if its top stays below the stats block (10.4, 10.5, 10.7).
+  // if its backing stays clear of the stats backing (10.4, 10.5, 10.7).
+  // Each block sits on a dark semi-transparent backing inside the canvas,
+  // so the text stays readable over the brick wallpaper.
   function drawHud(ctx, model) {
     if (!ctx || typeof ctx.fillText !== 'function' || !model) return;
     var lines = Array.isArray(model.lines) ? model.lines : [];
@@ -123,32 +145,45 @@
     ctx.globalAlpha = 1;
     ctx.globalCompositeOperation = 'source-over';
     ctx.font = HUD_FONT;
+    ctx.textAlign = 'left';
+
+    // Layout first, so both backings are drawn before any text.
+    var statsBottom = HUD_MARGIN + lines.length * HUD_LINE_H;
+    var hintLines = [];
+    var hintBottom = C.COURSE_H - HUD_MARGIN;
+    var hintTop = hintBottom;
+    if (typeof model.hint === 'string' && model.hint !== '') {
+      hintLines = wrapText(ctx, model.hint, maxWidth);
+      hintTop = hintBottom - hintLines.length * HUD_LINE_H;
+      if (hintTop - HUD_PAD_Y < statsBottom + HUD_PAD_Y) hintLines = []; // would overlap the stats
+    }
+
+    if (lines.length > 0) {
+      drawBacking(ctx, HUD_MARGIN - HUD_PAD_X, HUD_MARGIN - HUD_PAD_Y,
+        widestLine(ctx, lines, maxWidth) + 2 * HUD_PAD_X, lines.length * HUD_LINE_H + 2 * HUD_PAD_Y);
+    }
+    if (hintLines.length > 0) {
+      drawBacking(ctx, HUD_MARGIN - HUD_PAD_X, hintTop - HUD_PAD_Y,
+        widestLine(ctx, hintLines, maxWidth) + 2 * HUD_PAD_X, hintLines.length * HUD_LINE_H + 2 * HUD_PAD_Y);
+    }
+
     ctx.fillStyle = HUD_TEXT;
     ctx.shadowColor = HUD_SHADOW;
     ctx.shadowBlur = 3;
     ctx.shadowOffsetX = 1;
     ctx.shadowOffsetY = 1;
-    ctx.textAlign = 'left';
 
     // Stats block: top-aligned rows starting at y = 12.
     ctx.textBaseline = 'top';
     for (var i = 0; i < lines.length; i++) {
       ctx.fillText(String(lines[i]), HUD_MARGIN, HUD_MARGIN + i * HUD_LINE_H, maxWidth);
     }
-    var statsBottom = HUD_MARGIN + lines.length * HUD_LINE_H;
 
     // Hint: bottom-aligned rows ending 12 px above the canvas bottom.
-    if (typeof model.hint === 'string' && model.hint !== '') {
-      var hintLines = wrapText(ctx, model.hint, maxWidth);
-      var bottom = C.COURSE_H - HUD_MARGIN;
-      var top = bottom - hintLines.length * HUD_LINE_H;
-      if (hintLines.length > 0 && top >= statsBottom) {
-        ctx.textBaseline = 'bottom';
-        for (var k = 0; k < hintLines.length; k++) {
-          var y = bottom - (hintLines.length - 1 - k) * HUD_LINE_H;
-          ctx.fillText(hintLines[k], HUD_MARGIN, y, maxWidth);
-        }
-      }
+    ctx.textBaseline = 'bottom';
+    for (var k = 0; k < hintLines.length; k++) {
+      var y = hintBottom - (hintLines.length - 1 - k) * HUD_LINE_H;
+      ctx.fillText(hintLines[k], HUD_MARGIN, y, maxWidth);
     }
     ctx.restore();
   }

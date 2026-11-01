@@ -4,22 +4,24 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ghostly Echoes</title>
+  <link rel="icon" type="image/png" href="assets/ghosty.png">
   <style>
     :root {
       color-scheme: dark;
-      --bg: #06070d;
-      --bg-haze: #1a1433;
-      --canvas-bg: #161829;
-      --frame: #463f78;
-      --glow: rgba(142, 118, 255, 0.32);
-      --glow-strong: rgba(142, 118, 255, 0.5);
-      --text: #e8eaf7;
-      --muted: #c3c7e2;
-      --accent: #8fd8ff;
-      --panel: rgba(18, 16, 36, 0.8);
-      --panel-border: rgba(110, 104, 170, 0.55);
-      --kbd-bg: #1d1f38;
-      --kbd-border: #6a6fa0;
+      --bg: #120a06;
+      --bg-warm: #2b170e;
+      --canvas-bg: #1a110d;
+      --bronze: #a8803f;
+      --bronze-dark: #5e4421;
+      --ember: rgba(255, 128, 48, 0.28);
+      --ember-strong: rgba(255, 140, 56, 0.45);
+      --parchment: #f1e3c4;
+      --parchment-muted: #dccaa4;
+      --accent: #ffd166;
+      --panel: rgba(30, 18, 11, 0.85);
+      --panel-border: rgba(168, 128, 63, 0.55);
+      --kbd-bg: #2a1a10;
+      --kbd-border: #8a6a3a;
     }
     *, *::before, *::after {
       box-sizing: border-box;
@@ -31,9 +33,10 @@
     }
     body {
       background-color: var(--bg);
-      background-image: radial-gradient(ellipse at 50% 35%, var(--bg-haze) 0%, var(--bg) 70%);
+      /* Warm center fading to a dark vignette at the edges. */
+      background-image: radial-gradient(ellipse at 50% 40%, var(--bg-warm) 0%, var(--bg) 65%, #070403 100%);
       background-attachment: fixed;
-      color: var(--text);
+      color: var(--parchment);
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       line-height: 1.5;
     }
@@ -51,31 +54,34 @@
       max-width: 100%;
       height: auto;
       background: var(--canvas-bg);
-      border: 1px solid var(--frame);
+      border: 3px solid var(--bronze);
       border-radius: 8px;
       box-shadow:
-        0 0 0 1px rgba(0, 0, 0, 0.6),
-        0 0 24px var(--glow),
-        0 14px 40px rgba(0, 0, 0, 0.65);
+        0 0 0 1px var(--bronze-dark),
+        inset 0 0 0 1px rgba(0, 0, 0, 0.6),
+        0 0 26px var(--ember),
+        0 14px 40px rgba(0, 0, 0, 0.7);
       touch-action: none; /* stop touch scrolling/zooming on the canvas (2.7) */
-      animation: haunt 6s ease-in-out infinite;
+      animation: ember 5s ease-in-out infinite;
     }
     canvas:focus-visible {
       outline: 3px solid var(--accent);
       outline-offset: 4px;
     }
-    @keyframes haunt {
+    @keyframes ember {
       0%, 100% {
         box-shadow:
-          0 0 0 1px rgba(0, 0, 0, 0.6),
-          0 0 24px var(--glow),
-          0 14px 40px rgba(0, 0, 0, 0.65);
+          0 0 0 1px var(--bronze-dark),
+          inset 0 0 0 1px rgba(0, 0, 0, 0.6),
+          0 0 26px var(--ember),
+          0 14px 40px rgba(0, 0, 0, 0.7);
       }
       50% {
         box-shadow:
-          0 0 0 1px rgba(0, 0, 0, 0.6),
-          0 0 38px var(--glow-strong),
-          0 14px 40px rgba(0, 0, 0, 0.65);
+          0 0 0 1px var(--bronze-dark),
+          inset 0 0 0 1px rgba(0, 0, 0, 0.6),
+          0 0 40px var(--ember-strong),
+          0 14px 40px rgba(0, 0, 0, 0.7);
       }
     }
     .controls {
@@ -83,7 +89,7 @@
       padding: 8px 16px;
       max-width: 100%;
       font-size: 15px;
-      color: var(--muted);
+      color: var(--parchment-muted);
       text-align: center;
       background: var(--panel);
       border: 1px solid var(--panel-border);
@@ -93,7 +99,7 @@
       display: inline-block;
       min-width: 1.6em;
       padding: 1px 6px;
-      color: var(--text);
+      color: var(--parchment);
       background: var(--kbd-bg);
       border: 1px solid var(--kbd-border);
       border-bottom-width: 2px;

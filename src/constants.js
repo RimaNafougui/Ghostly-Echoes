@@ -79,12 +79,38 @@
 
     // Styles
     ECHO_ALPHA: 0.45, // within 30-60 % (4.7)
-    ECHO_TINTS: ['#5ec8ff', '#ffb347', '#b78cff'],
+    // Cool and bright so each Echo stays visible at 45 % over red/brown bricks.
+    ECHO_TINTS: ['#3fefff', '#ffe066', '#8fffb0'], // cyan, gold, mint
     RUNE_STYLES: [
-      { symbol: '\u25C6', color: '#ff5ea8' }, // ◆
-      { symbol: '\u25B2', color: '#59e38c' }, // ▲
-      { symbol: '\u25CF', color: '#ffd84d' } // ●
+      { symbol: '\u25C6', color: '#8fc8ff' }, // ◆ pale blue
+      { symbol: '\u25B2', color: '#4cff6e' }, // ▲ green
+      { symbol: '\u25CF', color: '#ffc93c' } // ● gold
     ],
+    // Castle manor theme (renderer and HUD drawing only).
+    PALETTE: {
+      // Brick wallpaper: dark reds, rust and browns, kept low in contrast.
+      brick: ['#5a2219', '#642a1c', '#4e1f17', '#6b3320', '#57301f', '#4a2a1e'],
+      mortar: '#1a110d',
+      brickHighlight: 'rgba(255, 200, 160, 0.06)',
+      brickShade: 'rgba(0, 0, 0, 0.22)',
+      wallDim: 'rgba(8, 4, 3, 0.35)',
+      torchGlow: 'rgba(255, 150, 60, 0.16)',
+      vignette: 'rgba(5, 2, 1, 0.75)',
+      // Gameplay walls: cool weathered stone, unlike the bricks.
+      stone: '#9aa3ad',
+      stoneEdge: '#2e333b',
+      stoneHighlight: 'rgba(255, 255, 255, 0.18)',
+      hazard: '#b45cff',
+      hazardEdge: '#f3e6ff',
+      finish: '#f3e6c8',
+      player: '#ffffff',
+      gateEdge: '#140c08',
+      gateSymbol: '#140c08',
+      text: '#f6ecd6',
+      textBacking: 'rgba(12, 6, 4, 0.72)',
+      notice: '#ffd166',
+      errorTitle: '#ff9a7a'
+    },
     STAGE1_HINT:
       "Fly through the rune, press R once you're past it, then let your echo open the gate."
   });
