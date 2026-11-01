@@ -2,6 +2,8 @@
 
 A ghost runner where your failures become your teammates. Every time you die or press R to restart, that run turns into an **Echo**: a translucent replay of exactly what you did. Echoes can't die and pass through everything. An Echo that flies over a **rune** holds its linked **gate** open, so the way through a stage is to cooperate with your past self: one run opens the gate, the next run flies through it.
 
+**Play in your browser:** <https://rimanafougui.github.io/Ghostly-Echoes/>
+
 ## Screenshots
 
 ![Stage 1, Attempt 1: the white ghost floats in front of a red-brown brick wall, with a pale stone pillar ahead that has a gap in the middle. The HUD reads Stage 1, Attempt 1, Echoes 0/3, and the hint at the bottom says to fly through the rune, press R once past it, then let your echo open the gate.](img/gameplay-start.png)
@@ -36,7 +38,7 @@ A ghost runner where your failures become your teammates. Every time you die or 
 There's nothing to install and no build step.
 
 - **Locally:** open `index.html` in a browser (it works from `file://`).
-- **GitHub Pages:** serve the repository root. All paths are relative.
+- **GitHub Pages:** play the live version at <https://rimanafougui.github.io/Ghostly-Echoes/>, or serve the repository root from your own fork. All paths are relative.
 
 ## How to test
 
