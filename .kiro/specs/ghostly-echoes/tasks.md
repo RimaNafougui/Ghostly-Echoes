@@ -233,19 +233,19 @@ The build order follows the design's module order: constants → rng → test ha
     - HUD read-only: a Run's state sequence is identical whether or not `getHudModel` is called each step
     - _Requirements: 10.1, 10.2, 10.3, 10.4, 10.6, 10.7, 10.8_
 
-- [ ] 9. Implement the browser shell
-  - [~] 9.1 Create `src/input.js`
+- [x] 9. Implement the browser shell
+  - [x] 9.1 Create `src/input.js`
     - `createInputHandler(target, canvas, isAcceptingFlaps)`: non-repeat `Space`/`ArrowUp` keydown anywhere, `mousedown` with `button === 0` on the canvas, `touchstart` on the canvas
     - `preventDefault()` on Space/ArrowUp keydown and touchstart; queue flaps only when `isAcceptingFlaps()` is true
     - Non-repeat `KeyR` keydown sets `restart = true`; `drain()` returns `{ flap: queue > 0, restart }` and clears both
     - _Requirements: 2.1, 2.2, 2.6, 2.7, 8.4, A12_
 
-  - [~] 9.2 Create `src/audio.js`
+  - [x] 9.2 Create `src/audio.js`
     - `createAudio(srcs)` with `Audio` elements for `assets/jump.wav` and `assets/game_over.wav`, `unlock()` on the first gesture, `play(name)` resetting `currentTime` inside try/catch with `.catch(() => {})` on the Promise
     - Load errors mark a sound unavailable and turn `play` into a no-op
     - _Requirements: 7.4, 7.5, 7.9_
 
-  - [~] 9.3 Create `src/renderer.js`
+  - [x] 9.3 Create `src/renderer.js`
     - `createRenderer(ctx, image)` with camera `camX = player.x − PLAYER_START_X`
     - Draw order: background, walls, Hazards, Runes and gates in `RUNE_STYLES[k]` (closed = solid bar, open = dashed outline at 25 % alpha), Echoes, Player, then HUD
     - Echo tints from per-tint offscreen canvases (sprite + `source-atop` fill) drawn at `ECHO_ALPHA`; Player via `drawImage` scaled to 32×32 when the image is ready
@@ -253,7 +253,7 @@ The build order follows the design's module order: constants → rng → test ha
     - Draw the error screen ("Reload to try again") in `'error'` mode and the non-fatal `notice` if set
     - _Requirements: 4.7, 4.8, 6.9, 6.12, 10.5, 11.3, 11.5_
 
-  - [~] 9.4 Add `drawHud(ctx, model)` to `src/hud.js`
+  - [x] 9.4 Add `drawHud(ctx, model)` to `src/hud.js`
     - Stats top-left at 16 px with 12 px margins; hint word-wrapped to `COURSE_W − 24`, bottom-aligned 12 px above the canvas bottom and only drawn if it stays below the stats block
     - Keep all HUD text inside canvas bounds; keep `getHudModel` DOM-free and guard `drawHud` so the file still loads in Node
     - _Requirements: 10.4, 10.5, 10.7_

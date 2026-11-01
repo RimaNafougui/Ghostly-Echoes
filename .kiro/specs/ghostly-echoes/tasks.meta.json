@@ -454,6 +454,16 @@
         "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
         "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
         "timestamp": 1793488281496
+      },
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793491446967
+      },
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793491694846
       }
     ],
     "9.2 Create `src/audio.js`": [
@@ -461,6 +471,16 @@
         "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
         "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
         "timestamp": 1793488281523
+      },
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793491447739
+      },
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793491695756
       }
     ],
     "9.3 Create `src/renderer.js`": [
@@ -468,6 +488,16 @@
         "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
         "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
         "timestamp": 1793488281550
+      },
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793491448421
+      },
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793491696834
       }
     ],
     "9.4 Add `drawHud(ctx, model)` to `src/hud.js`": [
@@ -475,6 +505,16 @@
         "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
         "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
         "timestamp": 1793488281575
+      },
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793491697502
+      },
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793491839133
       }
     ],
     "10.1 Complete the browser bootstrap in `src/main.js`": [
@@ -531,6 +571,13 @@
         "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
         "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
         "timestamp": 1793491410653
+      }
+    ],
+    "9. Implement the browser shell": [
+      {
+        "executionId": "e661b3ae-4a26-4e89-9213-80621ab2d871",
+        "chatSessionId": "sess_8987240a-1647-47d6-9959-0a42f81bbd95",
+        "timestamp": 1793491839168
       }
     ]
   }
