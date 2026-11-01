@@ -282,7 +282,7 @@ The build order follows the design's module order: constants → rng → test ha
     - Assert there is no `package.json` dependency list (or no `package.json` at all)
     - _Requirements: 11.2, 11.4, 11.6, 12.1_
 
-- [~] 11. Final checkpoint - Ensure all tests pass
+- [x] 11. Final checkpoint - Ensure all tests pass
   - Ensure all tests pass with `node --test`, ask the user if questions arise.
 
 ## Notes
